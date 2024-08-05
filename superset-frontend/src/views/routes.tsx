@@ -122,6 +122,10 @@ const RowLevelSecurityList = lazy(
       /* webpackChunkName: "RowLevelSecurityList" */ 'src/pages/RowLevelSecurityList'
     ),
 );
+const SourcesList = lazy(
+  () =>
+    import(/* webpackChunkName: "DashboardList" */ 'src/pages/SourcesList'),
+);
 
 type Routes = {
   path: string;
@@ -224,6 +228,10 @@ export const routes: Routes = [
   {
     path: '/sqllab/',
     Component: SqlLab,
+  },
+  {
+    path: '/sources/list',
+    Component: SourcesList,
   },
 ];
 

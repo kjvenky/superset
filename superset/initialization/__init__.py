@@ -154,6 +154,7 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         from superset.reports.logs.api import ReportExecutionLogRestApi
         from superset.row_level_security.api import RLSRestApi
         from superset.security.api import SecurityRestApi
+        from superset.sources.api import SourceRestApi
         from superset.sqllab.api import SqlLabRestApi
         from superset.tags.api import TagRestApi
         from superset.views.alerts import AlertView, ReportView
@@ -161,6 +162,7 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         from superset.views.annotations import AnnotationLayerView
         from superset.views.api import Api
         from superset.views.chart.views import SliceAsync, SliceModelView
+        from superset.views.sources.views import SourcesModelView 
         from superset.views.core import Superset
         from superset.views.css_templates import (
             CssTemplateAsyncModelView,
@@ -223,8 +225,10 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_api(ReportExecutionLogRestApi)
         appbuilder.add_api(RLSRestApi)
         appbuilder.add_api(SavedQueryRestApi)
+        appbuilder.add_api(SourceRestApi)
         appbuilder.add_api(TagRestApi)
         appbuilder.add_api(SqlLabRestApi)
+        
         #
         # Setup regular views
         #
@@ -243,6 +247,7 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             category="Data",
             category_label=__("Data"),
         )
+        
         appbuilder.add_view(
             DashboardModelView,
             "Dashboards",
@@ -251,6 +256,15 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
             category="",
             category_icon="",
         )
+        appbuilder.add_view(
+            SourcesModelView,
+            "Sources",
+            label=__("Sourceses"),
+            icon="fa-bar-chart",
+            category="",
+            category_icon="",
+        )
+
         appbuilder.add_view(
             SliceModelView,
             "Charts",

@@ -409,3 +409,6 @@ class TableNotFoundException(SupersetErrorException):
                 level=ErrorLevel.ERROR,
             )
         )
+
+class SourceNotFoundException(SupersetException):
+    status = 404

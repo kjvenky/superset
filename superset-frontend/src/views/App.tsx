@@ -68,6 +68,8 @@ const LocationPathnameLogger = () => {
   return <></>;
 };
 
+console.log(bootstrapData.common.menu_data)
+
 const App = () => (
   <Router>
     <ScrollToTop />

@@ -186,15 +186,15 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 # or use `SUPERSET_SECRET_KEY` environment variable.
 # Use a strong complex alphanumeric string and use a tool to help you generate
 # a sufficiently random sequence, ex: openssl rand -base64 42"
-SECRET_KEY = os.environ.get("SUPERSET_SECRET_KEY") or CHANGE_ME_SECRET_KEY
+SECRET_KEY = 'voMWUQthO7kWyJtZYMLxPYtjPPzB7nYzuxQdsjTsPhYgbE1pRJXmHXdL'
 
 # The SQLAlchemy connection string.
-SQLALCHEMY_DATABASE_URI = (
-    f"""sqlite:///{os.path.join(DATA_DIR, "superset.db")}?check_same_thread=false"""
-)
+# SQLALCHEMY_DATABASE_URI = (
+#     f"""sqlite:///{os.path.join(DATA_DIR, "superset.db")}?check_same_thread=false"""
+# )
 
 # SQLALCHEMY_DATABASE_URI = 'mysql://myapp@localhost/myapp'
-# SQLALCHEMY_DATABASE_URI = 'postgresql://root:password@localhost/myapp'
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:he8dot5rkrbMTaJh2yJ6@aadar.cfy6omea2e6x.ap-south-1.rds.amazonaws.com:5432/experiments'
 
 # The default MySQL isolation level is REPEATABLE READ whereas the default PostgreSQL
 # isolation level is READ COMMITTED. All backends should use READ COMMITTED (or similar)
@@ -471,7 +471,7 @@ DEFAULT_FEATURE_FLAGS: dict[str, bool] = {
     # Exposes API endpoint to compute thumbnails
     "THUMBNAILS": False,
     "SHARE_QUERIES_VIA_KV_STORE": False,
-    "TAGGING_SYSTEM": False,
+    "TAGGING_SYSTEM": True,
     "SQLLAB_BACKEND_PERSISTENCE": True,
     "LISTVIEWS_DEFAULT_CARD_VIEW": False,
     # When True, this escapes HTML (rather than rendering it) in Markdown components
@@ -481,8 +481,8 @@ DEFAULT_FEATURE_FLAGS: dict[str, bool] = {
     "GLOBAL_ASYNC_QUERIES": False,
     "EMBEDDED_SUPERSET": False,
     # Enables Alerts and reports new implementation
-    "ALERT_REPORTS": False,
-    "ALERT_REPORT_TABS": False,
+    "ALERT_REPORTS": True,
+    "ALERT_REPORT_TABS": True,
     "ALERT_REPORT_SLACK_V2": False,
     "DASHBOARD_RBAC": False,
     "ENABLE_ADVANCED_DATA_TYPES": False,
@@ -542,6 +542,8 @@ DEFAULT_FEATURE_FLAGS: dict[str, bool] = {
     "SQLLAB_FORCE_RUN_ASYNC": False,
     # Set to True to to enable factory resent CLI command
     "ENABLE_FACTORY_RESET_COMMAND": False,
+    # Aoy Custom flags
+    "ENABLE_AIRBYTE_SOURCES": True
 }
 
 # ------------------------------
@@ -1749,6 +1751,10 @@ ENVIRONMENT_TAG_CONFIG = {
         "debug": {
             "color": "error.base",
             "text": "flask-debug",
+        },
+        "aoy-development": {
+            "color": "error.base",
+            "text": "aoy-development",
         },
         "development": {
             "color": "error.base",

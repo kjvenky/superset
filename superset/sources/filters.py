@@ -14,31 +14,24 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-from . import (
-    alerts,
-    api,
-    base,
-    core,
-    css_templates,
-    dynamic_plugins,
-    health,
-    sql_lab,
-    sources,
-    tags
-)
-from .log import api as log_api, views
+from typing import Any
 
-__all__ = [
-    "alerts",
-    "api",
-    "base",
-    "core",
-    "css_templates",
-    "dynamic_plugins",
-    "health",
-    "log_api",
-    "views",
-    "sql_lab",
-    "sources",
-    "tags",
-]
+from flask_sqlalchemy import BaseQuery
+
+from superset import security_manager
+from superset.models.source import Source
+from superset.utils.core import get_user_id
+from superset.views.base import BaseFilter
+
+
+class SourceFilter(BaseFilter):  # pylint: disable=too-few-public-methods
+    def apply(self, query: BaseQuery, value: Any) -> BaseQuery:
+        """
+        Filter queries to only those owned by current user. If
+        can_access_all_queries permission is set a user can list all queries
+
+        :returns: query
+        """
+        if not security_manager.can_access_all_queries():
+            query = query.filter(Source.user_id == get_user_id())
+        return query

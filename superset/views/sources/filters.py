@@ -14,31 +14,18 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-from . import (
-    alerts,
-    api,
-    base,
-    core,
-    css_templates,
-    dynamic_plugins,
-    health,
-    sql_lab,
-    sources,
-    tags
-)
-from .log import api as log_api, views
+from typing import Any
 
-__all__ = [
-    "alerts",
-    "api",
-    "base",
-    "core",
-    "css_templates",
-    "dynamic_plugins",
-    "health",
-    "log_api",
-    "views",
-    "sql_lab",
-    "sources",
-    "tags",
-]
+from sqlalchemy.orm.query import Query
+
+from superset import security_manager
+from superset.utils.filters import get_dataset_access_filters
+from superset.views.base import BaseFilter
+
+
+class SourceFilter(BaseFilter):  # pylint: disable=too-few-public-methods
+    def apply(self, query: Query, value: Any) -> Query:
+        if security_manager.can_access_all_datasources():
+            return query
+
+        return query.filter(get_dataset_access_filters(self.model))
