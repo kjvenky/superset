@@ -373,31 +373,6 @@ import {
         {
           Cell: ({
             row: {
-              original: {
-                datasource_name_text: dsNameTxt,
-                datasource_url: dsUrl,
-              },
-            },
-          }: any) => <GenericLink to={dsUrl}>{dsNameTxt}</GenericLink>,
-          Header: t('Dataset'),
-          accessor: 'datasource_id',
-          disableSortBy: true,
-          size: 'xl',
-        },
-        {
-          Cell: ({
-            row: {
-              original: { dashboards },
-            },
-          }: any) => <DashboardCrossLinks dashboards={dashboards} />,
-          Header: t('On dashboards'),
-          accessor: 'dashboards',
-          disableSortBy: true,
-          size: 'xxl',
-        },
-        {
-          Cell: ({
-            row: {
               original: { tags = [] },
             },
           }: any) => (
@@ -570,42 +545,7 @@ import {
           id: 'slice_name',
           input: 'search',
           operator: FilterOperator.ChartAllText,
-        },
-        ...(isFeatureEnabled(FeatureFlag.TaggingSystem) && canReadTag
-          ? [
-              {
-                Header: t('Tag'),
-                key: 'tags',
-                id: 'tags',
-                input: 'select',
-                operator: FilterOperator.ChartTagById,
-                unfilteredLabel: t('All'),
-                fetchSelects: loadTags,
-              },
-            ]
-          : []),
-        {
-          Header: t('Owner'),
-          key: 'owner',
-          id: 'owners',
-          input: 'select',
-          operator: FilterOperator.RelationManyMany,
-          unfilteredLabel: t('All'),
-          fetchSelects: createFetchRelated(
-            'chart',
-            'owners',
-            createErrorHandler(errMsg =>
-              addDangerToast(
-                t(
-                  'An error occurred while fetching chart owners values: %s',
-                  errMsg,
-                ),
-              ),
-            ),
-            props.user,
-          ),
-          paginate: true,
-        },
+        }
       ] as Filters;
       return filters_list;
     }, [addDangerToast, favoritesFilter, props.user]);
@@ -613,7 +553,7 @@ import {
     const sortTypes = [
       {
         desc: false,
-        id: 'slice_name',
+        id: 'source_name',
         label: t('Alphabetical'),
         value: 'alphabetical',
       },

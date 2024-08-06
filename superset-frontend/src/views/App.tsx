@@ -68,7 +68,7 @@ const LocationPathnameLogger = () => {
   return <></>;
 };
 
-console.log(bootstrapData.common.menu_data)
+console.log(bootstrapData.common.menu_data, "boot")
 
 const App = () => (
   <Router>

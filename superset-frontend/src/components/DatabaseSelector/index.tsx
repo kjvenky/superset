@@ -370,6 +370,8 @@ export default function DatabaseSelector({
       null,
     );
   }
+  
+
 
   function renderCatalogSelect() {
     const refreshIcon = !readOnly && (

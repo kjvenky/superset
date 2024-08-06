@@ -41,7 +41,7 @@ class SourcesModelView(
         RouteMethod.API_DELETE
     }
     # Handle permissions
-    class_permission_name = "Query"
+    class_permission_name = "Dataset"
     method_permission_name = MODEL_VIEW_RW_METHOD_PERMISSION_MAP
 
     def pre_add(self, item: "SourcesModelView") -> None:

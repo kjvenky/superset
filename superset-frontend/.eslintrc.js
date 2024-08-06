@@ -146,6 +146,12 @@ module.exports = {
         'padded-blocks': 0,
         'prefer-arrow-callback': 0,
         'prefer-destructuring': ['error', { object: true, array: false }],
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          },
+        ],
         'react/destructuring-assignment': 0, // re-enable up for discussion
         'react/forbid-prop-types': 0,
         'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],

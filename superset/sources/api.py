@@ -57,7 +57,7 @@ class SourceRestApi(BaseSupersetModelRestApi):
             return self.response_404()
         return None
 
-    class_permission_name = "Query"
+    class_permission_name = "Dataset"
     method_permission_name = MODEL_API_RW_METHOD_PERMISSION_MAP
 
     allow_browser_login = True

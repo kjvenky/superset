@@ -194,7 +194,7 @@ SECRET_KEY = 'voMWUQthO7kWyJtZYMLxPYtjPPzB7nYzuxQdsjTsPhYgbE1pRJXmHXdL'
 # )
 
 # SQLALCHEMY_DATABASE_URI = 'mysql://myapp@localhost/myapp'
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:he8dot5rkrbMTaJh2yJ6@aadar.cfy6omea2e6x.ap-south-1.rds.amazonaws.com:5432/experiments'
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:he8dot5rkrbMTaJh2yJ6@aadar.cfy6omea2e6x.ap-south-1.rds.amazonaws.com:5432/e3'
 
 # The default MySQL isolation level is REPEATABLE READ whereas the default PostgreSQL
 # isolation level is READ COMMITTED. All backends should use READ COMMITTED (or similar)
@@ -299,7 +299,7 @@ AUTH_RATE_LIMIT = "5 per second"
 # GLOBALS FOR APP Builder
 # ------------------------------
 # Uncomment to setup Your App name
-APP_NAME = "Superset"
+APP_NAME = "Agents of Yield"
 
 # Specify the App icon
 APP_ICON = "/static/assets/images/superset-logo-horiz.png"

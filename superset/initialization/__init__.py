@@ -259,7 +259,7 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view(
             SourcesModelView,
             "Sources",
-            label=__("Sourceses"),
+            label=__("Sources"),
             icon="fa-bar-chart",
             category="",
             category_icon="",
@@ -322,6 +322,7 @@ class SupersetAppInitializer:  # pylint: disable=too-many-public-methods
         appbuilder.add_view_no_menu(SliceAsync)
         appbuilder.add_view_no_menu(SqllabView)
         appbuilder.add_view_no_menu(SqlMetricInlineView)
+        appbuilder.add_view_no_menu(SourcesModelView)
         appbuilder.add_view_no_menu(Superset)
         appbuilder.add_view_no_menu(TableColumnInlineView)
         appbuilder.add_view_no_menu(TableModelView)

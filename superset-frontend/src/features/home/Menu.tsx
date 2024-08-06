@@ -413,5 +413,7 @@ export default function MenuWrapper({ data, ...rest }: MenuProps) {
   newMenuData.menu = cleanedMenu;
   newMenuData.settings = settings;
 
+  console.log(newMenuData)
+  
   return <Menu data={newMenuData} {...rest} />;
 }

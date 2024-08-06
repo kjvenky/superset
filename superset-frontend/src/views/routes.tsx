@@ -127,6 +127,13 @@ const SourcesList = lazy(
     import(/* webpackChunkName: "DashboardList" */ 'src/pages/SourcesList'),
 );
 
+const SourceCreation = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "SourceCreation" */ 'src/pages/SourceCreation'
+    ),
+);
+
 type Routes = {
   path: string;
   Component: ComponentType;
@@ -232,6 +239,10 @@ export const routes: Routes = [
   {
     path: '/sources/list',
     Component: SourcesList,
+  },
+  {
+    path: '/source/add',
+    Component: SourceCreation,
   },
 ];
 
