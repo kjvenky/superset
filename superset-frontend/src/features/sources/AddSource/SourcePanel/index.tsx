@@ -16,30 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import {
-  useEffect,
-  SetStateAction,
-  Dispatch,
-  useCallback,
-  ReactNode,
-} from 'react';
-import { styled, t } from '@superset-ui/core';
-import { LocalStorageKeys, getItem } from 'src/utils/localStorageHelpers';
-import { Select } from 'src/components';
-import RefreshLabel from 'src/components/RefreshLabel';
-import { FormLabel } from 'src/components/Form';
-import { SchemaOption } from 'src/hooks/apiResources';
-import { SourceActionType, SourceObject } from '../types';
+import { useEffect, useState } from 'react';
+import { styled } from '@superset-ui/core';
+import ShopifyPanel from './ShopifyPanel';
+import AmazonAdsPanel from './AmazonAdsPanel';
 
-interface LeftPanelProps {
-  setSource: Dispatch<SetStateAction<object>>;
-  source?: Partial<SourceObject> | null;
-  sourceNames?: string[] | undefined;
-}
-
-const EMPTY_SCHEMA_OPTIONS: SchemaOption[] = [];
-
-const LeftPanelStyle = styled.div`
+const SourcePanelStyle = styled.div`
   ${({ theme }) => `
     padding: ${theme.gridUnit * 4}px;
     height: 100%;
@@ -120,70 +102,37 @@ const LeftPanelStyle = styled.div`
 `}
 `;
 
-function renderSelectRow(select: ReactNode, refreshBtn: ReactNode) {
-  return (
-    <div className="section">
-      <span className="select">{select}</span>
-      {/* <span className="refresh">{refreshBtn}</span> */}
-    </div>
-  );
+export interface ISourcePanelWrapperProps {
+  /**
+   * Name of the source
+   */
+  sourceName?: string | null;
 }
 
-export default function LeftPanel({
-  setSource,
-  source,
-  sourceNames,
-}: LeftPanelProps) {
-  const setDataSource = useCallback(
-    (item: SourceObject) => {
-      setSource({ type: SourceActionType.SelectSource, payload: item });
-    },
-    [setSource],
-  );
+const SourcePanelWrapper = ({ sourceName }: ISourcePanelWrapperProps) => {
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const currentUserSelectedSource = getItem(
-      LocalStorageKeys.Source,
-      null,
-    ) as SourceObject;
-    if (currentUserSelectedSource) {
-      setDataSource(currentUserSelectedSource);
+    setLoading(true);
+
+    return () => {
+      setLoading(false);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getSourcePanel = () => {
+    switch (sourceName) {
+      case 'Amazon Ads':
+        return <AmazonAdsPanel sourceName={sourceName} loading={loading} />;
+      case 'Shopify':
+        return <ShopifyPanel sourceName={sourceName} loading={loading} />;
+      default:
+        return <ShopifyPanel sourceName={sourceName} loading={loading} />;
     }
-  }, [setDataSource]);
+  };
 
-  const readOnly = false;
+  return <SourcePanelStyle>{getSourcePanel()}</SourcePanelStyle>;
+};
 
-  const sourceOptions =
-    sourceNames?.map(name => ({ label: name, value: name, title: name })) ||
-    EMPTY_SCHEMA_OPTIONS;
-
-  // Static sources no need to refetch
-  function renderSourceSelect() {
-    const refreshIcon = !readOnly && (
-      <RefreshLabel
-        onClick={() => {}}
-        tooltipContent={t('Force refresh source list')}
-      />
-    );
-
-    return renderSelectRow(
-      <Select
-        ariaLabel={t('Select source or type to search sources')}
-        // disabled={!source}
-        header={<FormLabel>{t('Source')}</FormLabel>}
-        labelInValue
-        loading={false}
-        name="select-source"
-        notFoundContent={t('No compatible source found')}
-        placeholder={t('Select source or type to search sources')}
-        onChange={item => setDataSource(item as SourceObject)}
-        options={sourceOptions}
-        showSearch
-        value={source?.name}
-      />,
-      refreshIcon,
-    );
-  }
-
-  return <LeftPanelStyle>{renderSourceSelect()}</LeftPanelStyle>;
-}
+export default SourcePanelWrapper;

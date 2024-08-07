@@ -16,7 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { DatabaseObject } from 'src/components/DatabaseSelector';
 
 export enum SourceActionType {
   SelectSource,
@@ -25,12 +24,13 @@ export enum SourceActionType {
 
 export interface SourceObject {
   description?: string | null;
-  name?: string | null;
+  name?: string;
+  key?: string;
 }
 
 export interface SourceReducerPayloadType {
   name: string;
-  value?: string;
+  description?: string | null;
 }
 
 export type Schema = {
@@ -43,8 +43,6 @@ export type SourceReducerActionType =
       payload: Partial<SourceObject>;
     }
   | {
-      type:
-        | SourceActionType.SelectSource
-        | SourceActionType.ChangeSource
+      type: SourceActionType.SelectSource | SourceActionType.ChangeSource;
       payload: SourceReducerPayloadType;
     };

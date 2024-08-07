@@ -21,21 +21,19 @@ import { useParams } from 'react-router-dom';
 import useSourcesList from 'src/features/sources/hooks/useSourcesList';
 import Header from 'src/features/sources/AddSource/Header';
 import EditPage from 'src/features/sources/AddSource/EditDataset';
-import DatasetPanel from 'src/features/sources/AddSource/DatasetPanel';
+import SourcePanel from 'src/features/sources/AddSource/SourcePanel';
 import LeftPanel from 'src/features/sources/AddSource/LeftPanel';
 import Footer from 'src/features/sources/AddSource/Footer';
 import {
-  DatasetActionType,
-  DatasetObject,
-  DSReducerActionType,
   SourceActionType,
+  SourceReducerActionType,
   SourceObject,
 } from 'src/features/sources/AddSource/types';
 import DatasetLayout from 'src/features/datasets/DatasetLayout';
 
 export function sourceReducer(
   state: SourceObject | null,
-  action: SourceActionType,
+  action: SourceReducerActionType,
 ): Partial<SourceObject> | null {
   const trimmedState = {
     ...(state || {}),
@@ -46,7 +44,6 @@ export function sourceReducer(
       return {
         ...trimmedState,
         ...action.payload,
-        name: null,
       };
     default:
       return null;
@@ -58,7 +55,7 @@ const prevUrl =
 
 export default function AddSource() {
   const [source, setSource] = useReducer<
-    Reducer<Partial<SourceObject> | null, SourceActionType>
+    Reducer<Partial<SourceObject> | null, SourceReducerActionType>
   >(sourceReducer, null);
   const [hasColumns, setHasColumns] = useState(false);
   const [editPageIsVisible, setEditPageIsVisible] = useState(false);
@@ -86,13 +83,7 @@ export default function AddSource() {
 
   const EditSourceComponent = () => <EditPage id={id} />;
 
-  const SourcePanelComponent = () => (
-    <DatasetPanel
-      name={source?.name}
-      setHasColumns={setHasColumns}
-      sources={sources}
-    />
-  );
+  const SourcePanelComponent = () => <SourcePanel sourceName={source?.key} />;
 
   const FooterComponent = () => (
     <Footer
