@@ -23,6 +23,7 @@ import { Form, FormLabel } from 'src/components/Form';
 import { Input } from 'src/components/Input';
 import { Input as AntdInput, Tooltip } from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import { InputType, ShopifySourceObject } from '../types';
 
 const StyledDiv = styled.div`
   padding-top: ${({ theme }) => theme.gridUnit * 2}px;
@@ -56,7 +57,18 @@ export interface IShopifyPanelProps {
 }
 
 const ShopifyPanel = ({ sourceName, loading }: IShopifyPanelProps) => {
-  const onChange = () => {};
+  const [formData, setFormData] = useState<ShopifySourceObject>({
+    source_name: sourceName || 'Shopify',
+    shopify_store: '',
+    api_password: '',
+  });
+
+  const onChange: InputType['onChange'] = ({ target }) => {
+    setFormData({
+      ...formData,
+      [target.name]: target.value,
+    });
+  };
 
   return (
     <Form>
@@ -70,9 +82,9 @@ const ShopifyPanel = ({ sourceName, loading }: IShopifyPanelProps) => {
               name="source_name"
               type="text"
               placeholder={t('e.g. Shopify')}
-              value=""
+              value={formData.source_name}
               onChange={onChange}
-              data-test="source-panel-source-name-input"
+              data-test="shopify-panel-source-name-input"
             />
           </StyledDiv>
         </Col>
@@ -87,9 +99,9 @@ const ShopifyPanel = ({ sourceName, loading }: IShopifyPanelProps) => {
               name="shopify_store"
               type="text"
               placeholder={t('e.g. Analytics')}
-              value=""
+              value={formData.shopify_store}
               onChange={onChange}
-              data-test="source-panel-shopify-store-input"
+              data-test="shopify-panel-shopify-store-input"
             />
           </StyledDiv>
         </Col>
@@ -103,9 +115,9 @@ const ShopifyPanel = ({ sourceName, loading }: IShopifyPanelProps) => {
             <StyledInputPassword
               name="api_password"
               placeholder={t('e.g. ********')}
-              value=""
+              value={formData.api_password}
               onChange={onChange}
-              data-test="source-panel-api-password-input"
+              data-test="shopify-panel-api-password-input"
               iconRender={visible =>
                 visible ? (
                   <Tooltip title="Hide password.">

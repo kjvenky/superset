@@ -18,8 +18,9 @@
  */
 import { useEffect, useState } from 'react';
 import { styled } from '@superset-ui/core';
+import PlaceHolder from './PlaceHolder';
 import ShopifyPanel from './ShopifyPanel';
-import AmazonAdsPanel from './AmazonAdsPanel';
+import AmazonSellerPartnerPanel from './AmazonSellerPartnerPanel';
 
 const SourcePanelStyle = styled.div`
   ${({ theme }) => `
@@ -123,12 +124,14 @@ const SourcePanelWrapper = ({ sourceName }: ISourcePanelWrapperProps) => {
 
   const getSourcePanel = () => {
     switch (sourceName) {
-      case 'Amazon Ads':
-        return <AmazonAdsPanel sourceName={sourceName} loading={loading} />;
+      case 'Amazon Seller Partner':
+        return (
+          <AmazonSellerPartnerPanel sourceName={sourceName} loading={loading} />
+        );
       case 'Shopify':
         return <ShopifyPanel sourceName={sourceName} loading={loading} />;
       default:
-        return <ShopifyPanel sourceName={sourceName} loading={loading} />;
+        return <PlaceHolder />;
     }
   };
 

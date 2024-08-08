@@ -31,7 +31,7 @@ export enum LocalStorageKeys {
    * and therefore should be done in a major release.
    */
   Database = 'db',
-  Source = 'source'
+  Source = 'source',
   ChartSplitSizes = 'chart_split_sizes',
   ControlsWidth = 'controls_width',
   DatasourceWidth = 'datasource_width',

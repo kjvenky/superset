@@ -20,6 +20,7 @@
 import { styled } from '@superset-ui/core';
 import cls from 'classnames';
 import Loader from 'src/assets/images/loading.gif';
+import { Spin } from 'antd';
 
 export type PositionOption =
   | 'floating'
@@ -56,20 +57,51 @@ const LoaderImg = styled.img`
     transform: translate(-50%, -50%);
   }
 `;
+
+const StyledSpin = styled(Spin)`
+  z-index: 99;
+  width: 50px;
+  height: unset;
+  position: relative;
+  margin: 10px;
+  &.inline {
+    margin: 0px;
+    width: 30px;
+  }
+  &.inline-centered {
+    margin: 0 auto;
+    width: 30px;
+    display: block;
+  }
+  &.floating {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
+
 export default function Loading({
   position = 'floating',
   image,
   className,
 }: Props) {
   return (
-    <LoaderImg
+    // <LoaderImg
+    //   className={cls('loading', position, className)}
+    //   alt="Loading..."
+    //   src={image || Loader}
+    //   role="status"
+    //   aria-live="polite"
+    //   aria-label="Loading"
+    //   data-test="loading-indicator"
+    // />
+    <StyledSpin
       className={cls('loading', position, className)}
-      alt="Loading..."
-      src={image || Loader}
-      role="status"
-      aria-live="polite"
-      aria-label="Loading"
-      data-test="loading-indicator"
+      tip="Loading..."
+      size="large"
     />
   );
 }

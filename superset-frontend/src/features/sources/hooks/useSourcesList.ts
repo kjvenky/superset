@@ -32,7 +32,7 @@ const useSourcesList = () => {
     name: "Shopify"
   }, 
   {
-    name: "Amazon Ads"
+    name: "Amazon Seller Partner"
   },
   {
     name: "Flipkart"

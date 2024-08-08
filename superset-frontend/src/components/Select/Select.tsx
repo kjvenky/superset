@@ -116,6 +116,7 @@ const Select = forwardRef(
       showSearch = true,
       sortComparator = DEFAULT_SORT_COMPARATOR,
       tokenSeparators = TOKEN_SEPARATORS,
+      defaultValue,
       value,
       getPopupContainer,
       oneLine,
@@ -636,6 +637,7 @@ const Select = forwardRef(
           showSearch={shouldShowSearch}
           showArrow
           tokenSeparators={tokenSeparators}
+          defaultValue={defaultValue}
           value={selectValue}
           suffixIcon={getSuffixIcon(
             isLoading,

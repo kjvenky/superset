@@ -62,6 +62,7 @@ export type AntdExposedProps = Pick<
   | 'showArrow'
   | 'showSearch'
   | 'tokenSeparators'
+  | 'defaultValue'
   | 'value'
   | 'getPopupContainer'
   | 'menuItemSelectedIcon'

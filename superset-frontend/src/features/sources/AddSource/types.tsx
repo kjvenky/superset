@@ -46,3 +46,24 @@ export type SourceReducerActionType =
       type: SourceActionType.SelectSource | SourceActionType.ChangeSource;
       payload: SourceReducerPayloadType;
     };
+
+export type InputType = {
+  name?: string;
+  type?: string;
+  placeholder?: string;
+  value?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type ShopifySourceObject = {
+  source_name?: string;
+  shopify_store?: string;
+  api_password?: string;
+};
+
+export type AmazonSellerPartnerInputObject = {
+  source_name?: string;
+  lwa_client_id?: string;
+  lwa_client_secret?: string;
+  refresh_token?: string;
+};
