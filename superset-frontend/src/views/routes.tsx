@@ -122,16 +122,14 @@ const RowLevelSecurityList = lazy(
       /* webpackChunkName: "RowLevelSecurityList" */ 'src/pages/RowLevelSecurityList'
     ),
 );
+
 const SourcesList = lazy(
-  () =>
-    import(/* webpackChunkName: "DashboardList" */ 'src/pages/SourcesList'),
+  () => import(/* webpackChunkName: "SourcesList" */ 'src/pages/SourcesList'),
 );
 
 const SourceCreation = lazy(
   () =>
-    import(
-      /* webpackChunkName: "SourceCreation" */ 'src/pages/SourceCreation'
-    ),
+    import(/* webpackChunkName: "SourceCreation" */ 'src/pages/SourceCreation'),
 );
 
 type Routes = {
@@ -241,7 +239,7 @@ export const routes: Routes = [
     Component: SourcesList,
   },
   {
-    path: '/source/add',
+    path: '/sources/add',
     Component: SourceCreation,
   },
 ];

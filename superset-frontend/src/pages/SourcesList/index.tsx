@@ -621,7 +621,7 @@ import {
         ),
         buttonStyle: 'primary',
         onClick: () => {
-          history.push('/source/add');
+          history.push('/sources/add');
         },
       });
   

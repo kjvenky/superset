@@ -212,6 +212,7 @@ export function Menu({
   enum Paths {
     Explore = '/explore',
     Dashboard = '/dashboard',
+    Source = '/sources',
     Chart = '/chart',
     Datasets = '/tablemodelview',
   }
@@ -224,6 +225,9 @@ export function Menu({
     switch (true) {
       case path.startsWith(Paths.Dashboard):
         setActiveTabs(['Dashboards']);
+        break;
+      case path.startsWith(Paths.Source):
+        setActiveTabs(['Sources']);
         break;
       case path.startsWith(Paths.Chart) || path.startsWith(Paths.Explore):
         setActiveTabs(['Charts']);
@@ -413,7 +417,7 @@ export default function MenuWrapper({ data, ...rest }: MenuProps) {
   newMenuData.menu = cleanedMenu;
   newMenuData.settings = settings;
 
-  console.log(newMenuData)
-  
+  console.log(newMenuData);
+
   return <Menu data={newMenuData} {...rest} />;
 }
